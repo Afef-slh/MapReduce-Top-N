@@ -25,7 +25,7 @@
       <archive>
         <manifest>
           <addClasspath>true</addClasspath>
-          <mainClass>tn.isima.tp1.Main</mainClass>
+          <mainClass>tn.isima.topN.Main</mainClass>
         </manifest>
       </archive>
       <descriptorRefs>
