@@ -29,7 +29,7 @@ public class Reduce extends Reducer<NullWritable, Text, NullWritable, Text> {
                }
            }
    }
-	   context.write(NullWritable.get(), numberOfLikesPriorityQueue.poll().getRecord());
+	   
 }
    
 }
