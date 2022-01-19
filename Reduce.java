@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 
 public class Reduce extends Reducer<NullWritable, Text, NullWritable, Text> {
 
-   private PriorityQueue<User> numberOfLikesPriorityQueue = new PriorityQueue<User>();
+   private PriorityQueue<User> likesPriorityQueue = new PriorityQueue<User>();
 
    @Override
    public void reduce(NullWritable key , Iterable<Text> values , Context context) 
@@ -20,16 +20,16 @@ public class Reduce extends Reducer<NullWritable, Text, NullWritable, Text> {
        String line = value.toString();
        String[] data = line.split(",");
        int number_of_likes = Integer.parseInt(data[8]);
-       User user = numberOfLikesPriorityQueue.peek();
+       User user = likesPriorityQueue.peek();
 
-       if (numberOfLikesPriorityQueue.size()<=3 || number_of_likes > user.getNumberOfLikes()) {
-           numberOfLikesPriorityQueue.add(new User (number_of_likes , new Text(value)));
-               if (numberOfLikesPriorityQueue.size()>3) {
-                   numberOfLikesPriorityQueue.remove(user);
+       if (likesPriorityQueue.size()<=3 || likes > user.getLikes()) {
+           likesPriorityQueue.add(new User (likes , new Text(value)));
+               if (likesPriorityQueue.size()>3) {
+                   likesPriorityQueue.remove(user);
                }
            }
    }
-	   
+	   context.write(NullWritable.get(), likesPriorityQueue.peek().getRecord());
 }
    
 }
