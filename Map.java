@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 
 public class Map extends Mapper<LongWritable, Text, NullWritable, Text>{
 
-private PriorityQueue<User> numberOfLikesPriorityQueue = new PriorityQueue<User>();
+private PriorityQueue<User> likesPriorityQueue = new PriorityQueue<User>();
 
  
    public void map(LongWritable key, Text value, Context context)
