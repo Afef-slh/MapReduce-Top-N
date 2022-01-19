@@ -18,13 +18,13 @@ private PriorityQueue<User> numberOfLikesPriorityQueue = new PriorityQueue<User>
        throws IOException, InterruptedException {
            String line = value.toString();
            String[] data = line.split(",");
-           int number_of_likes = Integer.parseInt(data[9]);
-           User user = numberOfLikesPriorityQueue.peek();
+           int likes = Integer.parseInt(data[9]);
+           User user = likesPriorityQueue.peek();
 
-           if (numberOfLikesPriorityQueue.size()<=3 || number_of_likes > user.getNumberOfLikes()) {
-               numberOfLikesPriorityQueue.add(new User (number_of_likes , new Text(value)));
-               if (numberOfLikesPriorityQueue.size()>3) {
-                   numberOfLikesPriorityQueue.poll();
+           if (likesPriorityQueue.size()<=3 || likes > user.getLikes()) {
+               likesPriorityQueue.add(new User (likes , new Text(value)));
+               if (likesPriorityQueue.size()>3) {
+                   likesPriorityQueue.poll();
                }
            }
    
@@ -34,7 +34,7 @@ private PriorityQueue<User> numberOfLikesPriorityQueue = new PriorityQueue<User>
 
 
 while (!numberOfLikesPriorityQueue.isEmpty()){
-   context.write(NullWritable.get(), numberOfLikesPriorityQueue.poll().getRecord());
+   context.write(NullWritable.get(), likesPriorityQueue.poll().getRecord());
 }
 }
 }
